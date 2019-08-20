@@ -28,6 +28,11 @@
   :group 'didyoumean
   :type 'boolean)
 
+(defcustom didyoumean-ignored-extensions nil
+  "Do not suggest files that have these extensions."
+  :group 'didyoumean
+  :type '(repeat string))
+
 (defcustom didyoumean-custom-ignore-function nil
   "Do not suggest files that make this function return t."
   :group 'didyoumean
@@ -45,6 +50,15 @@
                      ;; don't suggest .elc
                      (and didyoumean-ignore-elc
                           (equal (file-name-extension x) "elc"))
+                     ;; don't suggest extensions in this list
+                     (and didyoumean-ignored-extensions
+                          ;; remove all nils, if the list is not empty
+                          ;; then an extension has matched, so this
+                          ;; `x' will be ignored
+                          (cl-remove nil (mapcar
+                                          (lambda (ext)
+                                            (equal (file-name-extension x) ext))
+                                          didyoumean-ignored-extensions)))
                      ;; don't suggest anything that d-c-i-f says so
                      (and (functionp didyoumean-custom-ignore-function)
                           (funcall didyoumean-custom-ignore-function file))))
