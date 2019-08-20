@@ -33,7 +33,6 @@
                       (not (equal file x))))
      (directory-files "." (file-name-absolute-p file)))))
 
-;;;###autoload
 (defun didyoumean ()
   "Prompt for files similar to the current file if they exist."
   (interactive)
@@ -62,6 +61,7 @@
       ;; killing the buffer during find-file-hook, sure...?
       (kill-buffer this-file))))
 
+;;;###autoload
 (add-hook 'find-file-hook #'didyoumean)
 
 (provide 'didyoumean)
