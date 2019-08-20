@@ -1,4 +1,4 @@
-;;; didyoumean.el --- did you mean to open another file? -*- lexical-binding: t; -*-
+;;; didyoumean.el --- Did you mean to open another file? -*- lexical-binding: t; -*-
 
 ;; Authors: Kisaragi Hiu <mail@kisaragi-hiu.com>
 ;; URL: https://git.sr.ht/~kisaragi_hiu/didyoumean.el
