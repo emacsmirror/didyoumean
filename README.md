@@ -4,6 +4,8 @@ Ask for the right file to open.
 
 Port of [EinfachToll/DidYouMean](https://github.com/EinfachToll/DidYouMean).
 
+![demo](https://kisaragi-hiu.com/static/emacs-didyoumean.mp4)
+
 ## Why
 
 You want to edit `hello.c` from the terminal. You type `emacs he` <kbd>TAB</kbd> <kbd>RET</kbd> expecting your shell to expand it to the right file name. Emacs opens up an empty `hello.` because there is a `hello.h` in the same folder. This package makes Emacs ask you which of these files you actually want to edit.
