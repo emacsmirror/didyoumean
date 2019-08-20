@@ -25,16 +25,31 @@
 
 (defvar didyoumean--history nil "History for `didyoumean' prompts.")
 
-(defun didyoumean ()
-  "Shut up."
-  (let ((matching-files (cl-remove-if-not
-                         (lambda (x) (and (string-prefix-p buffer-file-name x)
-                                          (not (equal buffer-file-name x))))
-                         (directory-files "." :full))))
-    (when matching-files
-      (completing-read "Did you mean: "
-                       matching-files nil nil nil
-                       'didyoumean--history))))
+(defun didyoumean--matching-files (file)
+  "Return files that seems to be similar in name to FILE (including itself)."
+  (cl-remove-if-not
+   (lambda (x) (and (string-prefix-p file x)))
+   (directory-files "." (file-name-absolute-p file))))
+
+;;;###autoload
+(defun didyoumean (current-file)
+  "Prompt for files similar to CURRENT-FILE if they exist."
+  (interactive `(,buffer-file-name))
+  (setq current-file (ignore-errors (expand-file-name current-file)))
+  (let ((matching-files (didyoumean--matching-files current-file)))
+    (when (> (length matching-files) 1)
+      (let ((comp-read-func
+             (cond ((or (bound-and-true-p ivy-mode)
+                        (bound-and-true-p helm-mode))
+                    ;; `completing-read' would be advised in this case
+                    #'completing-read)
+                   ;; the list needs to be visible up front
+                   (t (require 'ido)
+                      #'ido-completing-read))))
+        (funcall comp-read-func
+                 "Did you mean: "
+                 matching-files nil nil nil
+                 'didyoumean--history)))))
 
 (provide 'didyoumean)
 ;;; didyoumean.el ends here
