@@ -64,6 +64,7 @@
                           (funcall didyoumean-custom-ignore-function file))))
      (directory-files "." (file-name-absolute-p file)))))
 
+;;;###autoload
 (defun didyoumean ()
   "Prompt for files similar to the current file if they exist."
   (interactive)
