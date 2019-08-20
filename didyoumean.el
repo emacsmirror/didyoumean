@@ -2,7 +2,7 @@
 
 ;; Authors: Kisaragi Hiu <mail@kisaragi-hiu.com>
 ;; URL: https://git.sr.ht/~kisaragi_hiu/didyoumean.el
-;; Version: 0.0.1
+;; Version: 0.1.0
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 
@@ -12,8 +12,10 @@
 ;; it under the terms of the MIT License.
 
 ;;; Commentary:
-;; A simple function to look up words on the web.
-;; Probably better off to just use builtin `webjump.el', but oh well.
+;; Ask for the right file to open.
+
+;; FIXME: `didyoumean' too often breaks code that use `find-file' in Lisp
+
 ;;; Code:
 
 (require 'cl-lib)
