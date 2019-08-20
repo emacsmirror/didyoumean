@@ -16,6 +16,12 @@ You want to edit `hello.c` from the terminal. You type `emacs he` <kbd>TAB</kbd>
 (straight-use-package '(didyoumean :type git :repo "https://git.sr.ht/~kisaragi_hiu/didyoumean.el"))
 ```
 
+### [`quelpa`](https://framagit.org/steckerhalter/quelpa)
+
+```emacs-lisp
+(quelpa '(didyoumean :fetcher git :url "https://git.sr.ht/~kisaragi_hiu/didyoumean.el"))
+```
+
 ### Manually
 
 Put `doyoumean.el` under your `load-path`, then `(require 'doyoumean)` in your init file.
