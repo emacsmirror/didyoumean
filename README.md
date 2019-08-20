@@ -13,13 +13,13 @@ You want to edit `hello.c` from the terminal. You type `emacs he` <kbd>TAB</kbd>
 ### [`straight.el`](https://github.com/raxod502/straight.el)
 
 ```emacs-lisp
-(straight-use-package '(didyoumean :type git :repo "https://git.sr.ht/~kisaragi_hiu/didyoumean.el"))
+(straight-use-package '(didyoumean :type git :host gitlab :repo "kisaragi-hiu/didyoumean.el"))
 ```
 
 ### [`quelpa`](https://framagit.org/steckerhalter/quelpa)
 
 ```emacs-lisp
-(quelpa '(didyoumean :fetcher git :url "https://git.sr.ht/~kisaragi_hiu/didyoumean.el"))
+(quelpa '(didyoumean :fetcher gitlab :repo "kisaragi-hiu/didyoumean.el"))
 ```
 
 ### Manually

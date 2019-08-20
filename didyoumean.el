@@ -1,7 +1,7 @@
 ;;; didyoumean.el --- Did you mean to open another file? -*- lexical-binding: t; -*-
 
 ;; Authors: Kisaragi Hiu <mail@kisaragi-hiu.com>
-;; URL: https://git.sr.ht/~kisaragi_hiu/didyoumean.el
+;; URL: https://gitlab.com/kisaragi-hiu/didyoumean.el
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
