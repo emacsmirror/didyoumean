@@ -26,18 +26,17 @@
 (defvar didyoumean--history nil "History for `didyoumean' prompts.")
 
 (defun didyoumean--matching-files (file)
-  "Return files that seems to be similar in name to FILE (including itself)."
-  (cl-remove-if-not
-   (lambda (x) (and (string-prefix-p file x)))
-   (directory-files "." (file-name-absolute-p file))))
+  "Return files that seems to be similar in name to FILE (excluding itself)."
+  (when (stringp file)
+    (cl-remove-if-not
+     (lambda (x) (and (string-prefix-p file x)
+                      (not (equal file x))))
+     (directory-files "." (file-name-absolute-p file)))))
 
 ;;;###autoload
-(cl-defun didyoumean ()
+(defun didyoumean ()
   "Prompt for files similar to the current file if they exist."
   (interactive)
-  ;; use early return instead of nesting (when (let (when (let))))
-  (unless buffer-file-name (cl-return-from didyoumean nil))
-  ;; Switching to the right file if needed
   (let* ((matching-files (didyoumean--matching-files buffer-file-name))
          (comp-read-func
           (cond ((or (bound-and-true-p ivy-mode)
@@ -48,16 +47,17 @@
                 (t (require 'ido)
                    #'ido-completing-read)))
          (correct-file
-          (if (> (length matching-files) 1)
-              (funcall comp-read-func
-                       "Did you mean: "
-                       matching-files nil nil nil
-                       'didyoumean--history)
-            buffer-file-name)))
-    (unless (equal buffer-file-name correct-file)
+          (when matching-files
+            (funcall comp-read-func
+                     "Did you mean: "
+                     `(,buffer-file-name ,@matching-files)
+                     nil nil nil
+                     'didyoumean--history)))
+         (this-file (current-buffer)))
+    (when correct-file
       (find-file correct-file)
       ;; killing the buffer during find-file-hook, sure...?
-      (kill-current-buffer))))
+      (kill-buffer this-file))))
 
 ;;;###autoload
 (add-hook 'find-file-hook #'didyoumean)
