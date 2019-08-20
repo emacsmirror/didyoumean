@@ -4,7 +4,7 @@ Ask for the right file to open.
 
 Port of [EinfachToll/DidYouMean](https://github.com/EinfachToll/DidYouMean).
 
-![demo](https://kisaragi-hiu.com/static/emacs-didyoumean.mp4)
+![demo](https://kisaragi-hiu.com/static/emacs-didyoumean.gif)
 
 ## Why
 
