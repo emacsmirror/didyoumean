@@ -28,8 +28,7 @@ Put `doyoumean.el` under your `load-path`, then `(require 'doyoumean)` in your i
 
 ## Customize
 
-- `didyoumean-ignore-elc`: Should compiled Emacs Lisp files not be suggested?
-- `didyoumean-ignored-extensions`: List of other extensions that will not be suggested.
+- `didyoumean-ignored-extensions`: List of suffixes that will not be suggested.
 - `didyoumean-custom-ignore-function`: Custom predicate to not suggest some files.
 
 ## License

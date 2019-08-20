@@ -2,8 +2,8 @@
 
 ;; Authors: Kisaragi Hiu <mail@kisaragi-hiu.com>
 ;; URL: https://gitlab.com/kisaragi-hiu/didyoumean.el
-;; Version: 0.1.0
-;; Package-Requires: ((emacs "24"))
+;; Version: 0.2.0
+;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
 
 ;; This file is NOT part of GNU Emacs.
@@ -25,13 +25,11 @@
   :group 'convenience
   :prefix "didyoumean-")
 
-(defcustom didyoumean-ignore-elc t
-  "Do not suggest to open .elc (compiled Emacs Lisp) files."
-  :group 'didyoumean
-  :type 'boolean)
+(defcustom didyoumean-ignored-extensions '(".elc" "~" ".bak")
+  "Do not suggest files that have these extensions.
 
-(defcustom didyoumean-ignored-extensions nil
-  "Do not suggest files that have these extensions."
+More accurately, these are suffixes, to allow backup files to be
+ignored easily."
   :group 'didyoumean
   :type '(repeat string))
 
@@ -49,17 +47,14 @@
     (cl-remove-if
      (lambda (x) (or (not (string-prefix-p file x))
                      (equal file x)
-                     ;; don't suggest .elc
-                     (and didyoumean-ignore-elc
-                          (equal (file-name-extension x) "elc"))
                      ;; don't suggest extensions in this list
                      (and didyoumean-ignored-extensions
                           ;; remove all nils, if the list is not empty
                           ;; then an extension has matched, so this
                           ;; `x' will be ignored
                           (cl-remove nil (mapcar
-                                          (lambda (ext)
-                                            (equal (file-name-extension x) ext))
+                                          (lambda (suf)
+                                            (string-suffix-p suf x :ignore-case))
                                           didyoumean-ignored-extensions)))
                      ;; don't suggest anything that d-c-i-f says so
                      (and (functionp didyoumean-custom-ignore-function)
