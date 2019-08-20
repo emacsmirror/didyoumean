@@ -23,14 +23,31 @@
   :group 'convenience
   :prefix "didyoumean-")
 
+(defcustom didyoumean-ignore-elc t
+  "Do not suggest to open .elc (compiled Emacs Lisp) files."
+  :group 'didyoumean
+  :type 'boolean)
+
+(defcustom didyoumean-custom-ignore-function nil
+  "Do not suggest files that make this function return t."
+  :group 'didyoumean
+  :type '(choice (const :tag "None" nil)
+                 function))
+
 (defvar didyoumean--history nil "History for `didyoumean' prompts.")
 
 (defun didyoumean--matching-files (file)
   "Return files that seems to be similar in name to FILE (excluding itself)."
   (when (stringp file)
-    (cl-remove-if-not
-     (lambda (x) (and (string-prefix-p file x)
-                      (not (equal file x))))
+    (cl-remove-if
+     (lambda (x) (or (not (string-prefix-p file x))
+                     (equal file x)
+                     ;; don't suggest .elc
+                     (and didyoumean-ignore-elc
+                          (equal (file-name-extension x) "elc"))
+                     ;; don't suggest anything that d-c-i-f says so
+                     (and (functionp didyoumean-custom-ignore-function)
+                          (funcall didyoumean-custom-ignore-function file))))
      (directory-files "." (file-name-absolute-p file)))))
 
 (defun didyoumean ()
