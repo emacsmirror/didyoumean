@@ -14,8 +14,6 @@
 ;;; Commentary:
 ;; Ask for the right file to open.
 
-;; FIXME: `didyoumean' too often breaks code that use `find-file' in Lisp
-
 ;;; Code:
 
 (require 'cl-lib)
