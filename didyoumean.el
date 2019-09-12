@@ -2,7 +2,7 @@
 
 ;; Authors: Kisaragi Hiu <mail@kisaragi-hiu.com>
 ;; URL: https://gitlab.com/kisaragi-hiu/didyoumean.el
-;; Version: 0.2.0
+;; Version: 0.2.1
 ;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
 
@@ -92,6 +92,13 @@ ignored easily."
 
 ;;;###autoload
 (add-hook 'find-file-hook #'didyoumean)
+
+(defun didyoumean-unload-function ()
+  "Unload DidYouMean."
+  (remove-hook 'find-file-hook #'didyoumean)
+  ;; Continue standard unloading.
+  ;; See (info "(elisp)Unloading").
+  nil)
 
 (provide 'didyoumean)
 ;;; didyoumean.el ends here
