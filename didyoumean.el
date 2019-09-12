@@ -2,7 +2,7 @@
 
 ;; Authors: Kisaragi Hiu <mail@kisaragi-hiu.com>
 ;; URL: https://gitlab.com/kisaragi-hiu/didyoumean.el
-;; Version: 0.2.1
+;; Version: 0.3.0
 ;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
 
@@ -23,16 +23,13 @@
   :group 'convenience
   :prefix "didyoumean-")
 
-(defcustom didyoumean-ignored-extensions '(".elc" "~" ".bak")
-  "Do not suggest files that have these extensions.
-
-More accurately, these are suffixes, to allow backup files to be
-ignored easily."
+(defcustom didyoumean-ignored-suffixes '(".elc" "~" ".bak")
+  "Do not suggest files that have these suffixes."
   :group 'didyoumean
   :type '(repeat string))
 
 (defcustom didyoumean-custom-ignore-function nil
-  "Do not suggest files that make this function return t."
+  "Do not suggest files that make this function return non-nil."
   :group 'didyoumean
   :type '(choice (const :tag "None" nil)
                  function))
@@ -45,15 +42,12 @@ ignored easily."
     (cl-remove-if
      (lambda (x) (or (not (string-prefix-p file x))
                      (equal file x)
-                     ;; don't suggest extensions in this list
-                     (and didyoumean-ignored-extensions
-                          ;; remove all nils, if the list is not empty
-                          ;; then an extension has matched, so this
-                          ;; `x' will be ignored
+                     ;; don't suggest suffixes in this list
+                     (and didyoumean-ignored-suffixes
                           (cl-remove nil (mapcar
                                           (lambda (suf)
                                             (string-suffix-p suf x :ignore-case))
-                                          didyoumean-ignored-extensions)))
+                                          didyoumean-ignored-suffixes)))
                      ;; don't suggest anything that d-c-i-f says so
                      (and (functionp didyoumean-custom-ignore-function)
                           (funcall didyoumean-custom-ignore-function file))))
