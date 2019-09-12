@@ -30,7 +30,7 @@ Put `doyoumean.el` under your `load-path`, then `(require 'doyoumean)` in your i
 
 ## Customize
 
-- `didyoumean-ignored-extensions`: List of suffixes that will not be suggested.
+- `didyoumean-ignored-suffixes`: List of suffixes that will not be suggested.
 - `didyoumean-custom-ignore-function`: Custom predicate to not suggest some files.
 
 ## License
