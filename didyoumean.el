@@ -23,7 +23,7 @@
   :group 'convenience
   :prefix "didyoumean-")
 
-(defcustom didyoumean-ignored-suffixes '(".elc" "~" ".bak"
+(defcustom didyoumean-ignored-suffixes '(".elc" "~" ".bak" ".backup"
                                          ".pacnew" ".pacsave")
   "Do not suggest files that have these suffixes."
   :group 'didyoumean
