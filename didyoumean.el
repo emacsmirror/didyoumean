@@ -77,8 +77,6 @@
          (this-file (current-buffer)))
     (when (and correct-file
                (not (equal buffer-file-name correct-file)))
-      (message "%s" correct-file)
-      (message "%s" this-file)
       (find-file correct-file)
       ;; killing the buffer during find-file-hook, sure...?
       (kill-buffer this-file))))
