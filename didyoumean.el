@@ -2,7 +2,7 @@
 
 ;; Authors: Kisaragi Hiu <mail@kisaragi-hiu.com>
 ;; URL: https://gitlab.com/kisaragi-hiu/didyoumean.el
-;; Version: 0.3.0
+;; Version: 0.4.0
 ;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
 
@@ -82,11 +82,18 @@
       (kill-buffer this-file))))
 
 ;;;###autoload
-(add-hook 'find-file-hook #'didyoumean)
+(define-minor-mode didyoumean-mode
+  "DidYouMean minor mode.
+
+Prompt for files similar to the current file if they exist."
+  :global t
+  (if didyoumean-mode
+      (add-hook 'find-file-hook #'didyoumean)
+    (remove-hook 'find-file-hook #'didyoumean)))
 
 (defun didyoumean-unload-function ()
   "Unload DidYouMean."
-  (remove-hook 'find-file-hook #'didyoumean)
+  (didyoumean-mode -1)
   ;; Continue standard unloading.
   ;; See (info "(elisp)Unloading").
   nil)
