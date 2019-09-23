@@ -28,6 +28,12 @@ You want to edit `hello.c` from the terminal. You type `emacs he` <kbd>TAB</kbd>
 
 Put `doyoumean.el` under your `load-path`, then `(require 'doyoumean)` in your init file.
 
+## Enable
+
+```emacs-lisp
+(didyoumean-mode 1)
+```
+
 ## Customize
 
 - `didyoumean-ignored-suffixes`: List of suffixes that will not be suggested.
