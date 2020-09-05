@@ -43,11 +43,12 @@
   :prefix "didyoumean-")
 
 (defcustom didyoumean-ignored-suffixes '(".elc" "~" ".bak" ".backup"
-                                         ".pacnew" ".pacsave")
+                                         ".pacnew" ".pacsave" ".blend1")
   "Do not suggest files that have these suffixes."
   :group 'didyoumean
   :type '(repeat string))
 
+;; TODO: turn this into a hook
 (defcustom didyoumean-custom-ignore-function nil
   "Do not suggest files that make this function return non-nil."
   :group 'didyoumean
