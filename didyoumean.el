@@ -42,8 +42,10 @@
   :group 'convenience
   :prefix "didyoumean-")
 
-(defcustom didyoumean-ignored-suffixes '(".elc" "~" ".bak" ".backup"
-                                         ".pacnew" ".pacsave" ".blend1")
+(defcustom didyoumean-ignored-suffixes
+  '(".elc" "~" ".bak" ".backup"
+    ".pacnew" ".pacsave" ".blend1"
+    ".zwc")
   "Do not suggest files that have these suffixes."
   :group 'didyoumean
   :type '(repeat string))
