@@ -83,7 +83,8 @@
   (let* ((matching-files (didyoumean--matching-files buffer-file-name))
          (comp-read-func
           (cond ((or (bound-and-true-p ivy-mode)
-                     (bound-and-true-p helm-mode))
+                     (bound-and-true-p helm-mode)
+                     (bound-and-true-p vertico-mode))
                  ;; `completing-read' would be advised in this case
                  #'completing-read)
                 ;; the list needs to be visible up front
