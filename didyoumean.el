@@ -45,7 +45,7 @@
 (defcustom didyoumean-ignored-suffixes
   '(".elc" "~" ".bak" ".backup"
     ".pacnew" ".pacsave" ".blend1"
-    ".zwc")
+    ".zwc" ".map")
   "Do not suggest files that have these suffixes."
   :group 'didyoumean
   :type '(repeat string))
